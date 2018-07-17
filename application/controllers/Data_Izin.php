@@ -19,15 +19,30 @@ class Data_Izin extends CI_Controller {
 	}
 
 	public function cuti() {
-		
+		$data = generate_page('Data Izin Cuti', 'data_izin/cuti', 'Admin');
+
+			$data_content['title_page'] = 'Data Izin Cuti';
+			$data_content['list_all'] = $this->m_dataizin->cuti_list_all();
+		$data['content'] = $this->load->view('partial/DataIzinAdmin/V_Admin_DataIzinCuti_Read', $data_content, true);
+		$this->load->view('V_DataMaster_Admin', $data);
 	}
 
 	public function sekolah() {
-		
+		$data = generate_page('Data Izin Cuti', 'data_izin/sekolah', 'Admin');
+
+			$data_content['title_page'] = 'Data Izin Sekolah';
+			$data_content['list_all'] = $this->m_dataizin->sekolah_list_all();
+		$data['content'] = $this->load->view('partial/DataIzinAdmin/V_Admin_DataIzinSekolah_Read', $data_content, true);
+		$this->load->view('V_DataMaster_Admin', $data);
 	}
 
 	public function seminar() {
-		
+		$data = generate_page('Data Izin Seminar', 'data_izin/seminar', 'Admin');
+
+			$data_content['title_page'] = 'Data Izin Seminar';
+			$data_content['list_all'] = $this->m_dataizin->seminar_list_all();
+		$data['content'] = $this->load->view('partial/DataIzinAdmin/V_Admin_DataIzinSeminar_Read', $data_content, true);
+		$this->load->view('V_DataMaster_Admin', $data);
 	}
 
 }
