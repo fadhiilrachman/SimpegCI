@@ -172,17 +172,19 @@ class M_DataMaster extends CI_Model {
 		$this->session->set_flashdata('msg_alert', 'Data seminar berhasil diubah');
 	}
 
-	public function admin_update($id_user,$username, $email, $namalengkap, $password, $type, $avatar='') {
+	public function admin_update($id_user,$username, $email, $namalengkap, $password, $type, $avatar) {
 		$d_t_d = array(
 			'id_user' => $id_user,
 			'username' => $username,
 			'email' => $email,
 			'namalengkap' => $namalengkap,
-			'type' => $type,
-			'avatar' => $avatar
+			'type' => $type
 		);
 		if( !empty($password) ) {
 			$d_t_d['password'] = md5($password);
+		}
+		if( !empty($avatar) ) {
+			$d_t_d['avatar'] = $avatar;
 		}
 		$this->db->where('id_user', $id_user)->update('tb_admin', $d_t_d);
 		$this->session->set_flashdata('msg_alert', 'Data admin berhasil diubah');
@@ -256,7 +258,7 @@ class M_DataMaster extends CI_Model {
 	///
 
 	public function admin_add_new(
-		$username, $email, $namalengkap, $password, $type, $avatar=''
+		$username, $email, $namalengkap, $password, $type, $avatar=0
 	) {
 		$d_t_d = array(
 			'username' => $username,
@@ -266,6 +268,9 @@ class M_DataMaster extends CI_Model {
 			'type' => $type,
 			'avatar' => $avatar
 		);
+		if( empty($avatar) ) {
+			$d_t_d['avatar'] = 'avatar.png';
+		}
 		$this->db->insert('tb_admin', $d_t_d);
 		$this->session->set_flashdata('msg_alert', 'Admin baru berhasil ditambahkan');
 	}
@@ -323,7 +328,7 @@ class M_DataMaster extends CI_Model {
 	public function pegawai_add_new(
 		$nama,$nip,$tempat_lahir,$tanggal_lahir,$jenis_kelamin,$pendidikan_terakhir,$status_perkawinan,
 		$status_pegawai,$id_jabatan,$id_bidang,$agama,$alamat,$no_ktp,$no_rumah,$no_handphone,$email,
-		$password,$id_user,$tanggal_pengangkatan,$avatar
+		$password,$id_user,$tanggal_pengangkatan,$avatar=0
 	) {
 		$d_t_d = array(
 			'nama' => $nama,
@@ -347,6 +352,9 @@ class M_DataMaster extends CI_Model {
 			'tanggal_pengangkatan' => $tanggal_pengangkatan,
 			'avatar' => $avatar
 		);
+		if( empty($avatar) ) {
+			$d_t_d['avatar'] = 'avatar.png';
+		}
 		$this->db->insert('tb_pegawai', $d_t_d);
 		$this->session->set_flashdata('msg_alert', 'Pegawai baru berhasil ditambahkan');
 	}

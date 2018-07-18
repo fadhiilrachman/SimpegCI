@@ -305,7 +305,7 @@ class Data_Master extends CI_Controller {
 					$tanggal_pengangkatan= $this->security->xss_clean( $this->input->post('tanggal_pengangkatan') );
 					$avatar = '';
 					// avatar
-					if ( $this->security->xss_clean( $_FILES["avatar"] ) ) {
+					if ( $this->security->xss_clean( $_FILES["avatar"] ) && $_FILES['avatar']['name'] ) {
 						$config['upload_path']          = './uploads/avatar/';
 						$config['allowed_types']        = 'jpg|jpeg|png';
 						$config['max_size']             = 2000;
@@ -375,7 +375,7 @@ class Data_Master extends CI_Controller {
 					$type= $this->security->xss_clean( $this->input->post('type') );
 					$avatar = '';
 					// avatar
-					if ( $this->security->xss_clean( $_FILES["avatar"] ) ) {
+					if ( $this->security->xss_clean( $_FILES["avatar"] ) && $_FILES['avatar']['name'] ) {
 						$config['upload_path']          = './uploads/avatar/';
 						$config['allowed_types']        = 'jpg|jpeg|png';
 						$config['max_size']             = 2000;
@@ -533,7 +533,7 @@ class Data_Master extends CI_Controller {
 					$type= $this->security->xss_clean( $this->input->post('type') );
 					$avatar = '';
 					// avatar
-					if ( $this->security->xss_clean( $_FILES["avatar"] ) ) {
+					if ( $this->security->xss_clean( $_FILES["avatar"] ) && $_FILES['avatar']['name'] ) {
 						$config['upload_path']          = './uploads/avatar/';
 						$config['allowed_types']        = 'jpg|jpeg|png';
 						$config['max_size']             = 2000;
@@ -592,7 +592,7 @@ class Data_Master extends CI_Controller {
 					$tanggal_pengangkatan= $this->security->xss_clean( $this->input->post('tanggal_pengangkatan') );
 					$avatar = '';
 					// avatar
-					if ( $this->security->xss_clean( $_FILES["avatar"] ) ) {
+					if ( $this->security->xss_clean( $_FILES["avatar"] ) && $_FILES['avatar']['name'] ) {
 						$config['upload_path']          = './uploads/avatar/';
 						$config['allowed_types']        = 'jpg|jpeg|png';
 						$config['max_size']             = 2000;
