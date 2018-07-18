@@ -20,7 +20,8 @@ CREATE TABLE `tb_admin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 INSERT INTO `tb_admin` (`id_user`, `username`, `email`, `namalengkap`, `password`, `type`, `avatar`) VALUES
-(1, 'fadhiilrachman', 'admin@gmail.com', 'M Fadhiil Rachman', '21232f297a57a5a743894a0e4a801fc3', 'admin', '41241cacd6a56d9cb6bef52fb1d337b1.jpg');
+(1, 'fadhiilrachman', 'admin@gmail.com', 'M Fadhiil Rachman', '21232f297a57a5a743894a0e4a801fc3', 'admin', '41241cacd6a56d9cb6bef52fb1d337b1.jpg'),
+(6, 'baak', 'baak@gmail.com', 'Ka. BAAK', 'f6edb4c31cf9be5ce497d12251a9d29e', 'baak', '2b10f8e9a8cf35bd216750928492d585.jpg');
 
 CREATE TABLE `tb_bidang` (
   `id_bidang` int(255) NOT NULL,
@@ -41,6 +42,7 @@ INSERT INTO `tb_cuti` (`id_cuti`, `nama_cuti`) VALUES
 (4, 'Cuti Lebaran');
 
 CREATE TABLE `tb_izincuti` (
+  `id_izin` int(255) NOT NULL,
   `id_cuti` int(255) NOT NULL,
   `id` int(255) NOT NULL,
   `tglawal` date NOT NULL,
@@ -49,7 +51,11 @@ CREATE TABLE `tb_izincuti` (
   `status` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
+INSERT INTO `tb_izincuti` (`id_izin`, `id_cuti`, `id`, `tglawal`, `tempat`, `tglakhir`, `status`) VALUES
+(6, 1, 10, '2018-07-04', 'Bandung', '2018-08-09', 'waiting');
+
 CREATE TABLE `tb_izinsekolah` (
+  `id_izin` int(255) NOT NULL,
   `id_sekolah` int(255) NOT NULL,
   `id` int(255) NOT NULL,
   `tglawal` date NOT NULL,
@@ -58,7 +64,11 @@ CREATE TABLE `tb_izinsekolah` (
   `status` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
+INSERT INTO `tb_izinsekolah` (`id_izin`, `id_sekolah`, `id`, `tglawal`, `tempat`, `tglakhir`, `status`) VALUES
+(3, 4, 10, '2018-07-10', 'Jakarta', '2018-07-21', 'waiting');
+
 CREATE TABLE `tb_izinseminar` (
+  `id_izin` int(255) NOT NULL,
   `id_seminar` int(255) NOT NULL,
   `id` int(255) NOT NULL,
   `tglawal` date NOT NULL,
@@ -102,9 +112,7 @@ CREATE TABLE `tb_pegawai` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 INSERT INTO `tb_pegawai` (`id`, `nama`, `nip`, `tempat_lahir`, `tanggal_lahir`, `jenis_kelamin`, `pendidikan_terakhir`, `status_perkawinan`, `status_pegawai`, `id_jabatan`, `id_bidang`, `agama`, `alamat`, `no_ktp`, `no_rumah`, `no_handphone`, `email`, `password`, `id_user`, `tanggal_pengangkatan`, `avatar`) VALUES
-(5, 'Fadhiil Rachman', 312556, 'Jakarta Selatan', '2018-07-01', 'Laki-laki', 'S3', 'Belum kawin', 'Karyawan tetap', 1, 1, 'Islam', 'Komplek Permata Hijau No. 12', 2147483647, 41, 2147483647, 'fadhiilrachman@gmail.com', '478d60e7f087bcc03eb9d569c48a74ec', 0, '2018-07-01', '4d22c451cf3399d24764979e19e479ab.jpg'),
-(6, 'Fadhiil Rachman', 214214, 'Jakarta Selatan', '2018-07-01', 'Laki-laki', 'SMP/SMA', 'Belum kawin', 'Karyawan tetap', 1, 2, 'Islam', 'Komplek Permata Hijau No. 12', 12412, 24, 2147483647, 'fdlrcn@gmail.com', '3f2cf36a0963cf127ce8b5f1eb91a447', 0, '2018-07-11', 'f80f50b99cd70300317649263a15beb7.jpg'),
-(8, 'Fadhiil Rachman', 2412412, 'Jakarta Selatan', '2018-05-30', 'Laki-laki', 'SMP/SMA', 'Kawin', 'Karyawan tetap', 1, 1, 'Islam', 'Komplek Permata Hijau No. 12', 14124, 412, 2147483647, 'dloetz7@gmail.com', '0a040ec34abbfb7f3030345244a913c9', 0, '2018-03-01', '128ed002fa3ff1948e5a9db412e05729.jpg');
+(10, 'Berliana Indriyanti', 41551, 'Jakarta', '1989-02-09', 'Perempuan', 'S1', 'Belum kawin', 'Karyawan tetap', 3, 1, 'Islam', 'Komplek Permata Hijau No. 12', 2147483647, 12, 2147483647, 'pegawai@gmail.com', '047aeeb234644b9e2d4138ed3bc7976a', 0, '2018-07-04', 'ae418c5f337639f5c3bcef8589c8eb41.jpg');
 
 CREATE TABLE `tb_sekolah` (
   `id_sekolah` int(255) NOT NULL,
@@ -135,6 +143,15 @@ ALTER TABLE `tb_bidang`
 ALTER TABLE `tb_cuti`
   ADD PRIMARY KEY (`id_cuti`);
 
+ALTER TABLE `tb_izincuti`
+  ADD PRIMARY KEY (`id_izin`);
+
+ALTER TABLE `tb_izinsekolah`
+  ADD PRIMARY KEY (`id_izin`);
+
+ALTER TABLE `tb_izinseminar`
+  ADD PRIMARY KEY (`id_izin`);
+
 ALTER TABLE `tb_jabatan`
   ADD PRIMARY KEY (`id_jabatan`);
 
@@ -149,7 +166,7 @@ ALTER TABLE `tb_seminar`
 
 
 ALTER TABLE `tb_admin`
-  MODIFY `id_user` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_user` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 ALTER TABLE `tb_bidang`
   MODIFY `id_bidang` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
@@ -157,11 +174,20 @@ ALTER TABLE `tb_bidang`
 ALTER TABLE `tb_cuti`
   MODIFY `id_cuti` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
+ALTER TABLE `tb_izincuti`
+  MODIFY `id_izin` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+ALTER TABLE `tb_izinsekolah`
+  MODIFY `id_izin` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+ALTER TABLE `tb_izinseminar`
+  MODIFY `id_izin` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 ALTER TABLE `tb_jabatan`
   MODIFY `id_jabatan` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 ALTER TABLE `tb_pegawai`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 ALTER TABLE `tb_sekolah`
   MODIFY `id_sekolah` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
