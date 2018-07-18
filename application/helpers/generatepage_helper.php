@@ -29,8 +29,8 @@ if( !function_exists('generate_page') ) {
 			$data_menu['path_page'] = $path_page;
 			$data_menu['user_name'] = $ci->session->userdata('user_name');
 			$data_menu['user_avatar'] = $ci->session->userdata('user_avatar');
-			$data_menu['user_nama_jabatan'] = $ci->session->userdata('user_nama_jabatan');
-			$data_menu['user_nama_bidang'] = $ci->session->userdata('user_nama_bidang');
+			$data_menu['jabatan'] = $ci->session->userdata('user_nama_jabatan');
+			$data_menu['bidang'] = $ci->session->userdata('user_nama_bidang');
 		$data['menu'] = $ci->load->view('menu/V_Menu_' . $user_type, $data_menu, true);
 
 		$data['footer'] = $ci->load->view('default/V_Footer', '', true);

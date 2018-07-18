@@ -12,11 +12,11 @@ if( !function_exists('isnt_admin') ) {
 
 }
 
-if( !function_exists('isnt_baak') ) {
+if( !function_exists('isnt_adminbaak') ) {
 	
-	function isnt_baak($callback) {
+	function isnt_adminbaak($callback) {
 		$ci =& get_instance();
-		if ( $ci->session->userdata('user_type') !== 'baak') {
+		if ( $ci->session->userdata('user_type') !== 'admin' && $ci->session->userdata('user_type') !== 'baak') {
 			$callback();
 		}
 	}

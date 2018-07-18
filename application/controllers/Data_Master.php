@@ -8,7 +8,7 @@ class Data_Master extends CI_Controller {
 	function __construct() {
 		parent::__construct();
 		isnt_admin(function() {
-			redirect( base_url('auth/logout') );
+			redirect( base_url('auth/login') );
 		});
 		$this->load->model('M_DataMaster');
 		$this->m_datamaster = $this->M_DataMaster;
@@ -86,11 +86,11 @@ class Data_Master extends CI_Controller {
 
 	public function delete() {
 		if( empty($this->uri->segment('3'))) {
-			redirect( base_url('/dashboard/?id=3') );
+			redirect( base_url('/dashboard') );
 		}
 
 		if( empty($this->uri->segment('4'))) {
-			redirect( base_url('/dashboard/?id=4') );
+			redirect( base_url('/dashboard') );
 		}
 
 		$name=$this->uri->segment('3');

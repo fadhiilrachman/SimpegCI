@@ -15,12 +15,6 @@
               <img class="img-xs rounded-circle" src="<?=$user_avatar;?>" alt="<?=$user_name;?>">
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
-              <a href="<?=base_url('settings/update_profile');?>" class="dropdown-item mt-2">
-                Ubah Data Akun
-              </a>
-              <a href="<?=base_url('settings/change_password');?>" class="dropdown-item">
-                Ubah Password
-              </a>
               <a href="<?=base_url('auth/logout');?>" class="dropdown-item">
                 Keluar
               </a>

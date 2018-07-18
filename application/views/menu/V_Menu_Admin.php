@@ -67,22 +67,6 @@
               </ul>
             </div>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#ui-rd" aria-expanded="false" aria-controls="ui-rd">
-              <i class="menu-icon mdi mdi-poll"></i>
-              <span class="menu-title">Rekapitulasi Data</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="ui-rd">
-              <ul class="nav flex-column sub-menu">
-                <?=generate_navlink($path_page, 'rekapitulasi_data/admin', 'Data Admin');?>
-                <?=generate_navlink($path_page, 'rekapitulasi_data/jabatan', 'Data Jabatan');?>
-                <?=generate_navlink($path_page, 'rekapitulasi_data/bidang', 'Data Bidang');?>
-                <?=generate_navlink($path_page, 'rekapitulasi_data/pegawai', 'Data Pegawai');?>
-                <?=generate_navlink($path_page, 'rekapitulasi_data/izin', 'Data Izin');?>
-              </ul>
-            </div>
-          </li>
         </ul>
       </nav>
 <div class="main-panel">

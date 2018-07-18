@@ -17,6 +17,10 @@ class Dashboard extends CI_Controller {
 				$data = generate_page('Dashboard', 'dashboard', 'Admin');
 				$this->load->view('V_Dashboard_Admin', $data);
 				break;
+			case 'baak':
+				$data = generate_page('Dashboard', 'dashboard', 'BAAK');
+				$this->load->view('V_Dashboard_BAAK', $data);
+				break;
 			case 'pegawai':
 				$data = generate_page('Dashboard', 'dashboard', 'Pegawai');
 				$this->load->view('V_Dashboard_Pegawai', $data);
