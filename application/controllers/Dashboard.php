@@ -15,15 +15,33 @@ class Dashboard extends CI_Controller {
 		switch ( $this->session->userdata('user_type') ) {
 			case 'admin':
 				$data = generate_page('Dashboard', 'dashboard', 'Admin');
-				$this->load->view('V_Dashboard_Admin', $data);
+
+					$data_content['total_admin'] = $this->m_dashboard->total_admin();
+					$data_content['total_dataizin'] = $this->m_dashboard->total_dataizin();
+					$data_content['total_izinterkonfirmasi'] = $this->m_dashboard->total_izinterkonfirmasi();
+					$data_content['total_pegawai'] = $this->m_dashboard->total_pegawai();
+				$data['content'] = $this->load->view('partial/Dashboard/Admin', $data_content, true);
+				$this->load->view('V_Dashboard', $data);
 				break;
 			case 'baak':
 				$data = generate_page('Dashboard', 'dashboard', 'BAAK');
-				$this->load->view('V_Dashboard_BAAK', $data);
+
+					$data_content['baak_total_izincuti'] = $this->m_dashboard->baak_total_izincuti();
+					$data_content['baak_total_izinsekolah'] = $this->m_dashboard->baak_total_izinsekolah();
+					$data_content['baak_total_izinseminar'] = $this->m_dashboard->baak_total_izinseminar();
+					$data_content['baak_izin_terkonfirmasi'] = $this->m_dashboard->baak_izin_terkonfirmasi();
+				$data['content'] = $this->load->view('partial/Dashboard/BAAK', $data_content, true);
+				$this->load->view('V_Dashboard', $data);
 				break;
 			case 'pegawai':
 				$data = generate_page('Dashboard', 'dashboard', 'Pegawai');
-				$this->load->view('V_Dashboard_Pegawai', $data);
+
+					$data_content['pegawai_total_izincuti'] = $this->m_dashboard->pegawai_total_izincuti();
+					$data_content['pegawai_total_izinsekolah'] = $this->m_dashboard->pegawai_total_izinsekolah();
+					$data_content['pegawai_total_izinseminar'] = $this->m_dashboard->pegawai_total_izinseminar();
+					$data_content['pegawai_izin_terkonfirmasi'] = $this->m_dashboard->pegawai_izin_terkonfirmasi();
+				$data['content'] = $this->load->view('partial/Dashboard/Pegawai', $data_content, true);
+				$this->load->view('V_Dashboard', $data);
 				break;
 			
 			default:

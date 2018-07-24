@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class M_AjukanIzin extends CI_Model {
 
 	public function get_data_cuti($id) {
-		$q=$this->db->select('b.nama_bidang, j.nama_jabatan, p.nama, p.nip, c.nama_cuti, ic.tempat, ic.tglawal, ic.tglakhir')
+		$q=$this->db->select('b.nama_bidang, j.nama_jabatan, p.tempat_lahir, p.tanggal_lahir, p.alamat, p.nama, p.nip, c.nama_cuti, ic.tempat, ic.tglawal, ic.tglakhir')
 				->from('tb_izincuti as ic')
 				->join('tb_pegawai as p', 'p.id = ic.id', 'LEFT')
 				->join('tb_jabatan as j', 'j.id_jabatan = p.id_jabatan', 'LEFT')
@@ -19,7 +19,7 @@ class M_AjukanIzin extends CI_Model {
 	}
 
 	public function get_data_sekolah($id) {
-		$q=$this->db->select('b.nama_bidang, j.nama_jabatan, p.nama, p.nip, c.nama_sekolah, ic.tempat, ic.tglawal, ic.tglakhir')
+		$q=$this->db->select('b.nama_bidang, j.nama_jabatan, p.tempat_lahir, p.tanggal_lahir, p.alamat, p.nama, p.nip, c.nama_sekolah, ic.tempat, ic.tglawal, ic.tglakhir')
 				->from('tb_izinsekolah as ic')
 				->join('tb_pegawai as p', 'p.id = ic.id', 'LEFT')
 				->join('tb_jabatan as j', 'j.id_jabatan = p.id_jabatan', 'LEFT')
@@ -34,7 +34,7 @@ class M_AjukanIzin extends CI_Model {
 	}
 
 	public function get_data_seminar($id) {
-		$q=$this->db->select('b.nama_bidang, j.nama_jabatan, p.nama, p.nip, c.nama_seminar, ic.tempat, ic.tglawal, ic.tglakhir')
+		$q=$this->db->select('b.nama_bidang, j.nama_jabatan, p.tempat_lahir, p.tanggal_lahir, p.alamat, p.nama, p.nip, c.nama_seminar, ic.tempat, ic.tglawal, ic.tglakhir')
 				->from('tb_izinseminar as ic')
 				->join('tb_pegawai as p', 'p.id = ic.id', 'LEFT')
 				->join('tb_jabatan as j', 'j.id_jabatan = p.id_jabatan', 'LEFT')

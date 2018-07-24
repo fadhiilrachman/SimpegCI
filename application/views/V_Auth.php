@@ -48,12 +48,15 @@
                 <?php } ?>
                 <div class="form-group">
                   <label class="label">Email</label>
-                    <input type="text" name="email" class="form-control" placeholder="Email">
+                  <input type="text" name="email" class="form-control" placeholder="Email">
                 </div>
                 <div class="form-group">
                   <label class="label">Password</label>
-                    <input type="password" name="password" class="form-control" placeholder="*********">
+                  <input type="password" name="password" class="form-control" placeholder="*********">
                 </div>
+                <div class="form-group"><center>
+                  <div class="g-recaptcha" data-sitekey="6LftN2IUAAAAALCWS7KvM5zb913HfuR89PeQr04L"></div>
+                </center></div>
                 <div class="form-group">
                   <button class="btn btn-primary submit-btn btn-block">Masuk</button>
                 </div>
@@ -71,10 +74,11 @@
       </div>
     </div>
   </div>
-  <script src="<?=assets_url('vendors/js/vendor.bundle.base.js');?>"></script>
-  <script src="<?=assets_url('vendors/js/vendor.bundle.addons.js');?>"></script>
-  <script src="<?=assets_url('js/off-canvas.js');?>"></script>
-  <script src="<?=assets_url('js/misc.js');?>"></script>
+  <script type="text/javascript" src="<?=assets_url('vendors/js/vendor.bundle.base.js');?>"></script>
+  <script type="text/javascript" src="<?=assets_url('vendors/js/vendor.bundle.addons.js');?>"></script>
+  <script type="text/javascript" src="<?=assets_url('js/off-canvas.js');?>"></script>
+  <script type="text/javascript" src="<?=assets_url('js/misc.js');?>"></script>
+  <script type="text/javascript" src="https://www.google.com/recaptcha/api.js"></script>
   <script type="text/javascript">
     $.ajaxSetup({
       headers: { 'X-CSRF-TOKEN': $('meta[name="<?=$this->security->get_csrf_token_name();?>"]').attr('content') },

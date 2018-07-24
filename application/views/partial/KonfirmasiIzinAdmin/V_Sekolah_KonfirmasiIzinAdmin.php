@@ -79,7 +79,7 @@
                     </td>
                     <td>
                       <button type="button" onclick="javascript:top.location.href='<?=base_url("/konfirmasi_izin/accept/sekolah/{$d->id_izin}");?>';" class="btn btn-success btn-icons btn-rounded"><i class="mdi mdi-check-circle"></i></button>
-                      <button type="button" onclick="javascript:top.location.href='<?=base_url("/surat_keterangan/sekolah/{$d->id_izin}");?>';" class="btn btn-info btn-icons btn-rounded"><i class="mdi mdi-printer"></i></button>
+                      <button type="button" onclick="javascript:top.location.href='<?=base_url("/surat_keterangan/sekolah/{$d->id_izin}?dl");?>';" class="btn btn-info btn-icons btn-rounded"><i class="mdi mdi-printer"></i></button>
                       <button type="button" onclick="javascript:top.location.href='<?=base_url("/konfirmasi_izin/reject/sekolah/{$d->id_izin}");?>';" class="btn btn-icons btn-rounded btn-inverse-danger"><i class="mdi mdi-close-circle-outline"></i></button>
                     </td>
                   </tr>

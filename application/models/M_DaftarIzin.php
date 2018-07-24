@@ -3,6 +3,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_DaftarIzin extends CI_Model {
 
+	///
+
+	public function sekolah_delete($id) {
+		$this->db->delete('tb_izinsekolah', array('id_izin' => $id));
+	}
+
+	public function cuti_delete($id) {
+		$this->db->delete('tb_izincuti', array('id_izin' => $id));
+	}
+
+	public function seminar_delete($id) {
+		$this->db->delete('tb_izinseminar', array('id_izin' => $id));
+	}
 	
 	public function cuti_list_all() {
 		$q=$this->db->select('p.nama, ic.id_izin, ic.id, ic.id_cuti, c.nama_cuti, ic.tempat, ic.tglawal, ic.tglakhir, ic.status')

@@ -15,6 +15,9 @@
               <img class="img-xs rounded-circle" src="<?=$user_avatar;?>" alt="<?=$user_name;?>">
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
+              <a href="<?=base_url('change_password');?>" class="dropdown-item">
+                Ganti Password
+              </a>
               <a href="<?=base_url('auth/logout');?>" class="dropdown-item">
                 Keluar
               </a>

@@ -7,11 +7,16 @@ class Data_Izin extends CI_Controller {
 
 	function __construct() {
 		parent::__construct();
-		isnt_admin(function() {
+		isnt_adminbaak(function() {
 			redirect( base_url('auth/login') );
 		});
 		$this->load->model('M_DataIzin');
 		$this->m_dataizin = $this->M_DataIzin;
+		if( $this->session->userdata('user_type') == 'admin' ) {
+			$this->user_type = 'Admin';
+		} else if( $this->session->userdata('user_type') == 'baak' ){
+			$this->user_type = 'BAAK';
+		}
 	}
 
 	public function index() {
@@ -19,7 +24,7 @@ class Data_Izin extends CI_Controller {
 	}
 
 	public function cuti() {
-		$data = generate_page('Data Izin Cuti', 'data_izin/cuti', 'Admin');
+		$data = generate_page('Data Izin Cuti', 'data_izin/cuti', $this->user_type);
 
 			$data_content['title_page'] = 'Data Izin Cuti';
 			$data_content['list_all'] = $this->m_dataizin->cuti_list_all();
@@ -28,7 +33,7 @@ class Data_Izin extends CI_Controller {
 	}
 
 	public function sekolah() {
-		$data = generate_page('Data Izin Cuti', 'data_izin/sekolah', 'Admin');
+		$data = generate_page('Data Izin Cuti', 'data_izin/sekolah', $this->user_type);
 
 			$data_content['title_page'] = 'Data Izin Sekolah';
 			$data_content['list_all'] = $this->m_dataizin->sekolah_list_all();
@@ -37,7 +42,7 @@ class Data_Izin extends CI_Controller {
 	}
 
 	public function seminar() {
-		$data = generate_page('Data Izin Seminar', 'data_izin/seminar', 'Admin');
+		$data = generate_page('Data Izin Seminar', 'data_izin/seminar', $this->user_type);
 
 			$data_content['title_page'] = 'Data Izin Seminar';
 			$data_content['list_all'] = $this->m_dataizin->seminar_list_all();

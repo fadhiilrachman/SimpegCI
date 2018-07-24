@@ -84,7 +84,8 @@
                     </td>
                     <td>
                       <button type="button" onclick="javascript:top.location.href='<?=base_url("/data_izin/edit/seminar/{$d->id_izin}");?>';" class="btn btn-warning btn-icons btn-rounded"><i class="mdi mdi-pencil-box-outline"></i></button>
-                      <button type="button" onclick="javascript:top.location.href='<?=base_url("/surat_keterangan/seminar/{$d->id_izin}");?>';" class="btn btn-info btn-icons btn-rounded"><i class="mdi mdi-printer"></i></button>
+                      <button type="button" onclick="javascript:top.location.href='<?=base_url("/surat_keterangan/seminar/{$d->id_izin}");?>';" class="btn btn-info btn-icons btn-rounded" title="Print surat"><i class="mdi mdi-printer"></i></button>
+                      <button type="button" onclick="javascript:top.location.href='<?=base_url("/surat_keterangan/seminar/{$d->id_izin}?dl");?>';" class="btn btn-success btn-icons btn-rounded" title="Download file .doc"><i class="mdi mdi-download"></i></button>
                       <button type="button" onclick="javascript:top.location.href='<?=base_url("/data_izin/delete/seminar/{$d->id_izin}");?>';" class="btn btn-icons btn-rounded btn-inverse-danger"><i class="mdi mdi-delete"></i></button>
                     </td>
                   </tr>

@@ -13,6 +13,8 @@
 <?=$menu;?>
 
       <!-- page content start -->
+
+<?=$content;?>
       
       <!-- page content end -->
       

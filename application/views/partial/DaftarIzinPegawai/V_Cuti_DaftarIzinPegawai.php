@@ -78,7 +78,13 @@
                       <?=$d->status;?>
                     </td>
                     <td>
-                      <button type="button" onclick="javascript:top.location.href='<?=base_url("/surat_keterangan/cuti/{$d->id_izin}");?>';" class="btn btn-info btn-icons btn-rounded"><i class="mdi mdi-printer"></i></button>
+                      <?php if ( $d->status == 'approved' ) { ?>
+                      <button type="button" onclick="javascript:top.location.href='<?=base_url("/surat_keterangan/cuti/{$d->id_izin}");?>';" class="btn btn-info btn-icons btn-rounded" title="Print surat"><i class="mdi mdi-printer"></i></button>
+                      <button type="button" onclick="javascript:top.location.href='<?=base_url("/surat_keterangan/cuti/{$d->id_izin}?dl");?>';" class="btn btn-success btn-icons btn-rounded" title="Download file .doc"><i class="mdi mdi-download"></i></button>
+                      <?php } ?>
+                      <?php if ( $d->status == 'waiting' ) { ?>
+                      <button type="button" onclick="javascript:top.location.href='<?=base_url("/daftar_izin/cuti/delete/{$d->id_izin}");?>';" class="btn btn-icons btn-rounded btn-inverse-danger"><i class="mdi mdi-delete"></i></button>
+                      <?php } ?>
                     </td>
                   </tr>
                   <?php

@@ -15,6 +15,42 @@ class Daftar_Izin extends CI_Controller {
 		$this->m_di = $this->M_DaftarIzin;
 	}
 
+	public function delete() {
+		if( empty($this->uri->segment('3'))) {
+			redirect( base_url('/dashboard') );
+		}
+
+		if( empty($this->uri->segment('4'))) {
+			redirect( base_url('/dashboard') );
+		}
+
+		$name=$this->uri->segment('3');
+		$id=$this->uri->segment('4');
+
+		switch ($name) {
+			case 'cuti':
+				$this->m_di->cuti_delete($id);
+				$this->session->set_flashdata('msg_alert', 'Data izin cuti berhasil dihapus');
+				redirect( base_url('data_izin/cuti') );
+				break;
+			case 'sekolah':
+				$this->m_di->sekolah_delete($id);
+				$this->session->set_flashdata('msg_alert', 'Data izin sekolah berhasil dihapus');
+				redirect( base_url('data_izin/sekolah') );
+				break;
+			case 'seminar':
+				$this->m_di->seminar_delete($id);
+				$this->session->set_flashdata('msg_alert', 'Data izin seminar berhasil dihapus');
+				redirect( base_url('data_izin/seminar') );
+				break;
+			
+			default:
+				redirect( base_url() );
+				break;
+		}
+
+	}
+
 	public function cuti() {
 		$data = generate_page('Daftar Izin Cuti', 'daftar_izin/cuti', 'Pegawai');
 

@@ -22,6 +22,20 @@
             </a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#ui-di" aria-expanded="false" aria-controls="ui-di">
+              <i class="menu-icon mdi mdi-treasure-chest"></i>
+              <span class="menu-title">Manajemen Data Izin</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-di">
+              <ul class="nav flex-column sub-menu">
+                <?=generate_navlink($path_page, 'data_izin/cuti', 'Data Izin Cuti');?>
+                <?=generate_navlink($path_page, 'data_izin/sekolah', 'Data Izin Sekolah');?>
+                <?=generate_navlink($path_page, 'data_izin/seminar', 'Data Izin Seminar');?>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-ki" aria-expanded="false" aria-controls="ui-ki">
               <i class="menu-icon mdi mdi-checkbox-multiple-marked-outline"></i>
               <span class="menu-title">Konfirmasi Izin</span>
