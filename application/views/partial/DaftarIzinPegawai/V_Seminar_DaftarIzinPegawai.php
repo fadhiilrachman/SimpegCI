@@ -83,7 +83,7 @@
                       <button type="button" onclick="javascript:top.location.href='<?=base_url("/surat_keterangan/seminar/{$d->id_izin}?dl");?>';" class="btn btn-success btn-icons btn-rounded" title="Download file .doc"><i class="mdi mdi-download"></i></button>
                       <?php } ?>
                       <?php if ( $d->status == 'waiting' ) { ?>
-                      <button type="button" onclick="javascript:top.location.href='<?=base_url("/daftar_izin/seminar/delete/{$d->id_izin}");?>';" class="btn btn-icons btn-rounded btn-inverse-danger"><i class="mdi mdi-delete"></i></button>
+                      <button type="button" onclick="javascript:top.location.href='<?=base_url("/daftar_izin/delete/seminar/{$d->id_izin}");?>';" class="btn btn-icons btn-rounded btn-inverse-danger"><i class="mdi mdi-delete"></i></button>
                       <?php } ?>
                     </td>
                   </tr>

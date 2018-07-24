@@ -9,6 +9,9 @@ class Dashboard extends CI_Controller {
 		parent::__construct();
 		$this->load->model('M_Dashboard');
 		$this->m_dashboard = $this->M_Dashboard;
+		isnt_login(function() {
+			redirect( base_url('auth/login') );
+		});
 	}
 
 	public function index() {

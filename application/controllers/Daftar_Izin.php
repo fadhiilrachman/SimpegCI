@@ -31,17 +31,17 @@ class Daftar_Izin extends CI_Controller {
 			case 'cuti':
 				$this->m_di->cuti_delete($id);
 				$this->session->set_flashdata('msg_alert', 'Data izin cuti berhasil dihapus');
-				redirect( base_url('data_izin/cuti') );
+				redirect( base_url('daftar_izin/cuti') );
 				break;
 			case 'sekolah':
 				$this->m_di->sekolah_delete($id);
 				$this->session->set_flashdata('msg_alert', 'Data izin sekolah berhasil dihapus');
-				redirect( base_url('data_izin/sekolah') );
+				redirect( base_url('daftar_izin/sekolah') );
 				break;
 			case 'seminar':
 				$this->m_di->seminar_delete($id);
 				$this->session->set_flashdata('msg_alert', 'Data izin seminar berhasil dihapus');
-				redirect( base_url('data_izin/seminar') );
+				redirect( base_url('daftar_izin/seminar') );
 				break;
 			
 			default:
