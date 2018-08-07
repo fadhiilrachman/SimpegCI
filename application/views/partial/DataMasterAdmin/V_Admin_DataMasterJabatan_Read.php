@@ -17,42 +17,9 @@
               </div>
             </div>
             <div class="table-responsive">
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th>
-                      No.
-                    </th>
-                    <th>
-                      Nama Jabatan
-                    </th>
-                    <th>
-                      
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php
-                  $i=1;
-                  foreach ($list_all as $d) {
-                  ?>
-                  <tr>
-                    <td>
-                      <?=$i++;?>
-                    </td>
-                    <td>
-                      <?=$d->nama_jabatan;?>
-                    </td>
-                    <td>
-                      <button type="button" onclick="javascript:top.location.href='<?=base_url("/data_master/edit/jabatan/{$d->id_jabatan}");?>';" class="btn btn-warning btn-icons btn-rounded"><i class="mdi mdi-pencil-box-outline"></i></button>
-                      <button type="button" onclick="javascript:top.location.href='<?=base_url("/data_master/delete/jabatan/{$d->id_jabatan}");?>';" class="btn btn-icons btn-rounded btn-inverse-danger"><i class="mdi mdi-delete"></i></button>
-                    </td>
-                  </tr>
-                  <?php
-                  }
-                  ?>
-                </tbody>
-              </table>
+              <p>
+                <table class="data table table-striped" cellspacing="0" width="100%"></table>
+              </p>
             </div>
           </div>
         </div>

@@ -22,37 +22,89 @@ class Data_Master extends CI_Controller {
 		$data = generate_page('Data Master Admin', 'data_master/admin', 'Admin');
 
 			$data_content['title_page'] = 'Data Master Admin';
-			$data_content['list_all'] = $this->m_datamaster->admin_list_all();
 		$data['content'] = $this->load->view('partial/DataMasterAdmin/V_Admin_DataMasterAdmin_Read', $data_content, true);
 		$this->load->view('V_DataMaster_Admin', $data);
+	}
+
+	public function admin_ajax() {
+		json_dump(function() {
+			$result= $this->m_datamaster->admin_list_all();
+			$new_arr=array();$i=1;
+			foreach ($result as $key => $value) {
+				$value->no=$i;
+				$new_arr[]=$value;
+				$value->avatar = '<img src="' . uploads_url('avatar/'.$value->avatar) . '" alt="image" />';
+				$i++;
+			}
+			return array('data' => $new_arr);
+		});
 	}
 
 	public function jabatan() {
 		$data = generate_page('Data Master Jabatan', 'data_master/jabatan', 'Admin');
 
 			$data_content['title_page'] = 'Data Master Jabatan';
-			$data_content['list_all'] = $this->m_datamaster->jabatan_list_all();
 		$data['content'] = $this->load->view('partial/DataMasterAdmin/V_Admin_DataMasterJabatan_Read', $data_content, true);
 		$this->load->view('V_DataMaster_Admin', $data);
+	}
+
+	public function jabatan_ajax() {
+		json_dump(function() {
+			$result= $this->m_datamaster->jabatan_list_all();
+			$new_arr=array();$i=1;
+			foreach ($result as $key => $value) {
+				$value->no=$i;
+				$new_arr[]=$value;
+				$i++;
+			}
+			return array('data' => $new_arr);
+		});
 	}
 
 	public function bidang() {
 		$data = generate_page('Data Master Bidang', 'data_master/bidang', 'Admin');
 
 			$data_content['title_page'] = 'Data Master Bidang';
-			$data_content['list_all'] = $this->m_datamaster->bidang_list_all();
 		$data['content'] = $this->load->view('partial/DataMasterAdmin/V_Admin_DataMasterBidang_Read', $data_content, true);
 		$this->load->view('V_DataMaster_Admin', $data);
 		
+	}
+
+	public function bidang_ajax() {
+		json_dump(function() {
+			$result= $this->m_datamaster->bidang_list_all();
+			$new_arr=array();$i=1;
+			foreach ($result as $key => $value) {
+				$value->no=$i;
+				$new_arr[]=$value;
+				$i++;
+			}
+			return array('data' => $new_arr);
+		});
 	}
 
 	public function pegawai() {
 		$data = generate_page('Data Master Pegawai', 'data_master/pegawai', 'Admin');
 
 			$data_content['title_page'] = 'Data Master Pegawai';
-			$data_content['list_all'] = $this->m_datamaster->pegawai_list_all();
 		$data['content'] = $this->load->view('partial/DataMasterAdmin/V_Admin_DataMasterPegawai_Read', $data_content, true);
 		$this->load->view('V_DataMaster_Admin', $data);
+	}
+
+	public function pegawai_ajax() {
+		json_dump(function() {
+			$result= $this->m_datamaster->pegawai_list_all();
+			$new_arr=array();$i=1;
+			foreach ($result as $key => $value) {
+				$value->no=$i;
+				$new_arr[]=$value;
+				$value->tanggal_lahir = date_format( date_create($value->tanggal_lahir), 'd/m/Y');
+				$value->avatar = '<img src="' . uploads_url('avatar/'.$value->avatar) . '" alt="image" />';
+				$value->tanggal_pengangkatan = date_format( date_create($value->tanggal_pengangkatan), 'd/m/Y');
+				$i++;
+			}
+			return array('data' => $new_arr);
+		});
 	}
 
 	public function nama_izin() {
