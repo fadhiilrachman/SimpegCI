@@ -78,7 +78,6 @@
   <script type="text/javascript" src="<?=assets_url('vendors/js/vendor.bundle.addons.js');?>"></script>
   <script type="text/javascript" src="<?=assets_url('js/off-canvas.js');?>"></script>
   <script type="text/javascript" src="<?=assets_url('js/misc.js');?>"></script>
-  <script type="text/javascript" src="https://www.google.com/recaptcha/api.js"></script>
   <script type="text/javascript">
     $.ajaxSetup({
       headers: { 'X-CSRF-TOKEN': $('meta[name="<?=$this->security->get_csrf_token_name();?>"]').attr('content') },

@@ -27,34 +27,10 @@ class M_DataMaster extends CI_Model {
 		return $q->result();
 	}
 
-	public function cuti_list_all() {
-		$q=$this->db->select('*')->get('tb_cuti');
+	public function namaizin_list_all() {
+		$q=$this->db->select('*')->get('tb_namaizin');
 		return $q->result();
 	}
-
-	public function sekolah_list_all() {
-		$q=$this->db->select('*')->get('tb_sekolah');
-		return $q->result();
-	}
-
-	public function seminar_list_all() {
-		$q=$this->db->select('*')->get('tb_seminar');
-		return $q->result();
-	}
-
-	///
-
-	public function update($id_nilai,$id_mahasiswa,$id_matakuliah,$nilai) {
-		$d_t_d = array(
-			'id_mahasiswa' => $id_mahasiswa,
-			'id_matakuliah' => $id_matakuliah,
-			'nilai' => $nilai
-		);
-		$this->db->where('id_nilai', $id_nilai)->update('nilai', $d_t_d);
-		$this->session->set_flashdata('msg_alert', 'Data nilai berhasil diubah');
-	}
-
-	//
 
 	public function get_list_bidang() {
 		$q=$this->db->select('*')->get('tb_bidang');
@@ -65,8 +41,6 @@ class M_DataMaster extends CI_Model {
 		$q=$this->db->select('*')->get('tb_jabatan');
 		return $q->result();
 	}
-
-	///
 
 	public function get_data_jabatan($id) {
 		$q=$this->db->select('*')->from('tb_jabatan')->where('id_jabatan', $id)->limit(1)->get();
@@ -84,26 +58,10 @@ class M_DataMaster extends CI_Model {
 		return $q->row();
 	}
 
-	public function get_data_cuti($id) {
-		$q=$this->db->select('*')->from('tb_cuti')->where('id_cuti', $id)->limit(1)->get();
+	public function get_data_namaizin($id) {
+		$q=$this->db->select('*')->from('tb_namaizin')->where('id_namaizin', $id)->limit(1)->get();
 		if( $q->num_rows() < 1 ) {
 			redirect( base_url('/data_master/cuti') );
-		}
-		return $q->row();
-	}
-
-	public function get_data_sekolah($id) {
-		$q=$this->db->select('*')->from('tb_sekolah')->where('id_sekolah', $id)->limit(1)->get();
-		if( $q->num_rows() < 1 ) {
-			redirect( base_url('/data_master/sekolah') );
-		}
-		return $q->row();
-	}
-
-	public function get_data_seminar($id) {
-		$q=$this->db->select('*')->from('tb_seminar')->where('id_seminar', $id)->limit(1)->get();
-		if( $q->num_rows() < 1 ) {
-			redirect( base_url('/data_master/seminar') );
 		}
 		return $q->row();
 	}
@@ -130,8 +88,6 @@ class M_DataMaster extends CI_Model {
 		return $q->row();
 	}
 
-	///
-
 	public function jabatan_update($id,$nama_jabatan) {
 		$d_t_d = array(
 			'nama_jabatan' => $nama_jabatan
@@ -148,28 +104,13 @@ class M_DataMaster extends CI_Model {
 		$this->session->set_flashdata('msg_alert', 'Data bidang berhasil diubah');
 	}
 
-	public function cuti_update($id,$nama_cuti) {
+	public function namaizin_update($id_namaizin,$type,$nama_izin) {
 		$d_t_d = array(
-			'nama_cuti' => $nama_cuti
+			'type' => $type,
+			'nama_izin' => $nama_izin
 		);
-		$this->db->where('id_cuti', $id)->update('tb_cuti', $d_t_d);
-		$this->session->set_flashdata('msg_alert', 'Data cuti berhasil diubah');
-	}
-
-	public function sekolah_update($id,$nama_sekolah) {
-		$d_t_d = array(
-			'nama_sekolah' => $nama_sekolah
-		);
-		$this->db->where('id_sekolah', $id)->update('tb_sekolah', $d_t_d);
-		$this->session->set_flashdata('msg_alert', 'Data sekolah berhasil diubah');
-	}
-
-	public function seminar_update($id,$nama_seminar) {
-		$d_t_d = array(
-			'nama_seminar' => $nama_seminar
-		);
-		$this->db->where('id_seminar', $id)->update('tb_seminar', $d_t_d);
-		$this->session->set_flashdata('msg_alert', 'Data seminar berhasil diubah');
+		$this->db->where('id_namaizin', $id_namaizin)->update('tb_namaizin', $d_t_d);
+		$this->session->set_flashdata('msg_alert', 'Data nama izin berhasil diubah');
 	}
 
 	public function admin_update($id_user,$username, $email, $namalengkap, $password, $type, $avatar) {
@@ -225,8 +166,6 @@ class M_DataMaster extends CI_Model {
 		$this->session->set_flashdata('msg_alert', 'Data pegawai berhasil diubah');
 	}
 
-	///
-
 	public function admin_delete($id) {
 		$this->db->delete('tb_admin', array('id_user' => $id));
 	}
@@ -243,19 +182,9 @@ class M_DataMaster extends CI_Model {
 		$this->db->delete('tb_pegawai', array('id' => $id));
 	}
 
-	public function cuti_delete($id) {
-		$this->db->delete('tb_cuti', array('id_cuti' => $id));
+	public function namaizin_delete($id) {
+		$this->db->delete('tb_namaizin', array('id_namaizin' => $id));
 	}
-
-	public function sekolah_delete($id) {
-		$this->db->delete('tb_sekolah', array('id_sekolah' => $id));
-	}
-
-	public function seminar_delete($id) {
-		$this->db->delete('tb_seminar', array('id_seminar' => $id));
-	}
-
-	///
 
 	public function admin_add_new(
 		$username, $email, $namalengkap, $password, $type, $avatar=0
@@ -282,7 +211,7 @@ class M_DataMaster extends CI_Model {
 			'nama_jabatan' => $nama_jabatan
 		);
 		$this->db->insert('tb_jabatan', $d_t_d);
-		$this->session->set_flashdata('msg_alert', 'Nama jabatan baru berhasil ditambahkan');
+		$this->session->set_flashdata('msg_alert', 'Jabatan baru berhasil ditambahkan');
 	}
 
 	public function bidang_add_new(
@@ -292,37 +221,18 @@ class M_DataMaster extends CI_Model {
 			'nama_bidang' => $nama_bidang
 		);
 		$this->db->insert('tb_bidang', $d_t_d);
-		$this->session->set_flashdata('msg_alert', 'Nama bidang baru berhasil ditambahkan');
+		$this->session->set_flashdata('msg_alert', 'Bidang baru berhasil ditambahkan');
 	}
 
-	public function cuti_add_new(
-		$nama_cuti
+	public function namaizin_add_new(
+		$type,$nama_izin
 	) {
 		$d_t_d = array(
-			'nama_cuti' => $nama_cuti
+			'type' => $type,
+			'nama_izin' => $nama_izin
 		);
-		$this->db->insert('tb_cuti', $d_t_d);
-		$this->session->set_flashdata('msg_alert', 'Nama cuti baru berhasil ditambahkan');
-	}
-
-	public function sekolah_add_new(
-		$nama_sekolah
-	) {
-		$d_t_d = array(
-			'nama_sekolah' => $nama_sekolah
-		);
-		$this->db->insert('tb_sekolah', $d_t_d);
-		$this->session->set_flashdata('msg_alert', 'Nama sekolah baru berhasil ditambahkan');
-	}
-
-	public function seminar_add_new(
-		$nama_seminar
-	) {
-		$d_t_d = array(
-			'nama_seminar' => $nama_seminar
-		);
-		$this->db->insert('tb_seminar', $d_t_d);
-		$this->session->set_flashdata('msg_alert', 'Nama seminar baru berhasil ditambahkan');
+		$this->db->insert('tb_namaizin', $d_t_d);
+		$this->session->set_flashdata('msg_alert', 'Nama izin baru berhasil ditambahkan');
 	}
 
 	public function pegawai_add_new(

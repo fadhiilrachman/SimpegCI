@@ -3,50 +3,91 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_DaftarIzin extends CI_Model {
 
-	///
-
-	public function sekolah_delete($id) {
-		$this->db->delete('tb_izinsekolah', array('id_izin' => $id));
+	public function izin_list_all() {
+		$q=$this->db->select('p.nama, ic.id_izin, ic.id, ic.id_namaizin, ic.tempat, ic.tglawal, ic.tglakhir, ic.status, c.nama_izin, c.type')
+				->from('tb_izin as ic')
+				->join('tb_pegawai as p', 'p.id = ic.id', 'LEFT')
+				->join('tb_namaizin as c', 'c.id_namaizin = ic.id_namaizin', 'LEFT')
+				->where('ic.id', $this->session->userdata('user_id'))
+				->get();
+		return $q->result();
 	}
 
-	public function cuti_delete($id) {
-		$this->db->delete('tb_izincuti', array('id_izin' => $id));
+	public function izin_list_ajax($json) {
+		$new_arr=array();$i=1;
+		foreach ($json as $key => $value) {
+			$value->no=$i;
+			switch ($value->status) {
+				case 'waiting':
+					$label = 'warning';
+					break;
+				case 'rejected':
+					$label = 'danger';
+					break;
+				case 'approved':
+					$label = 'success';
+					break;
+			};
+			$diff  = date_diff( date_create($value->tglawal), date_create($value->tglakhir) );
+			$value->lama_izin = $diff->format('%d hari');
+			$value->tglawal = date_format( date_create($value->tglawal), 'd/m/Y');
+			$value->tglakhir = date_format( date_create($value->tglakhir), 'd/m/Y');
+			$value->n_status = $value->status;
+			$value->status = '<label class="badge badge-'.$label.' text-uppercase">'.$value->status.'</label>';
+			$new_arr[]=$value;
+			$i++;
+		}
+		return $new_arr;
 	}
 
-	public function seminar_delete($id) {
-		$this->db->delete('tb_izinseminar', array('id_izin' => $id));
+	public function get_namaizin($type) {
+		$q=$this->db->select('id_namaizin, nama_izin')->from('tb_namaizin')->where('type', $type)->get();
+		return $q->result();
+	}
+
+	public function add_new($id_namaizin,$tglawal,$tglakhir,$tempat) {
+		$d_t_d = array(
+			'id_namaizin' => $id_namaizin,
+			'id' => $this->session->userdata('user_id'),
+			'tglawal' => $tglawal,
+			'tglakhir' => $tglakhir,
+			'tempat' => $tempat,
+			'status' => 'waiting',
+		);
+		$this->db->insert('tb_izin', $d_t_d);
+		$this->session->set_flashdata('msg_alert', 'Izin berhasil diajukan');
+	}
+
+	public function update($id_izin,$id_namaizin,$tglawal,$tglakhir,$tempat) {
+		$d_t_d = array(
+			'id_namaizin' => $id_namaizin,
+			'tglawal' => $tglawal,
+			'tglakhir' => $tglakhir,
+			'tempat' => $tempat
+		);
+		$this->db->where( 'id_izin', $id_izin )->update('tb_izin', $d_t_d);
+		$this->session->set_flashdata('msg_alert', 'Data izin berhasil diubah');
+	}
+
+	public function get_data_izin($id_izin) {
+		$q=$this->db->select('b.nama_bidang, j.nama_jabatan, p.tanggal_lahir, p.nip, p.tempat_lahir, p.alamat, p.nama, ic.id_izin, ic.id, ic.id_namaizin, c.nama_izin, ic.tempat, ic.tglawal, ic.tglakhir, ic.status, c.type')
+				->from('tb_izin as ic')
+				->join('tb_pegawai as p', 'p.id = ic.id', 'LEFT')
+				->join('tb_jabatan as j', 'j.id_jabatan = p.id_jabatan', 'LEFT')
+				->join('tb_bidang as b', 'b.id_bidang = p.id_bidang', 'LEFT')
+				->join('tb_namaizin as c', 'c.id_namaizin = ic.id_namaizin', 'LEFT')
+				->where( 'ic.id_izin', $id_izin )
+				->limit(1)->get();
+		if( $q->num_rows() < 1 ) {
+			redirect( base_url('/data_izin') );
+		}
+		return $q->row();
+	}
+
+	public function delete($id_izin) {
+		$this->db->delete('tb_izin', array('id_izin' => $id_izin));
 	}
 	
-	public function cuti_list_all() {
-		$q=$this->db->select('p.nama, ic.id_izin, ic.id, ic.id_cuti, c.nama_cuti, ic.tempat, ic.tglawal, ic.tglakhir, ic.status')
-				->from('tb_izincuti as ic')
-				->join('tb_pegawai as p', 'p.id = ic.id', 'LEFT')
-				->join('tb_cuti as c', 'c.id_cuti = ic.id_cuti', 'LEFT')
-				->where('ic.id', $this->session->userdata('user_id'))
-				->get();
-		return $q->result();
-	}
-
-	public function sekolah_list_all() {
-		$q=$this->db->select('p.nama, ic.id_izin, ic.id, ic.id_sekolah, c.nama_sekolah, ic.tempat, ic.tglawal, ic.tglakhir, ic.status')
-				->from('tb_izinsekolah as ic')
-				->join('tb_pegawai as p', 'p.id = ic.id', 'LEFT')
-				->join('tb_sekolah as c', 'c.id_sekolah = ic.id_sekolah', 'LEFT')
-				->where('ic.id', $this->session->userdata('user_id'))
-				->get();
-		return $q->result();
-	}
-
-	public function seminar_list_all() {
-		$q=$this->db->select('p.nama, ic.id_izin, ic.id, ic.id_seminar, c.nama_seminar, ic.tempat, ic.tglawal, ic.tglakhir, ic.status')
-				->from('tb_izinseminar as ic')
-				->join('tb_pegawai as p', 'p.id = ic.id', 'LEFT')
-				->join('tb_seminar as c', 'c.id_seminar = ic.id_seminar', 'LEFT')
-				->where('ic.id', $this->session->userdata('user_id'))
-				->get();
-		return $q->result();
-	}
-
 }
 
 /* End of file M_DaftarIzin.php */

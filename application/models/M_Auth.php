@@ -37,7 +37,7 @@ class M_Auth extends CI_Model {
 			$this->session->set_userdata('user_email', $d->email);
 			$this->session->set_userdata('user_status', $d->status_pegawai);
 			$this->session->set_userdata('user_avatar', uploads_url('avatar/' . $d->avatar));
-			// id jabatan
+			
 			$ambil_jabatan=$this->db->select('*')->where('id_jabatan', $d->id_jabatan)->get('tb_jabatan');
 			if( $ambil_jabatan->num_rows() ) {
 				$data_jabatan = $ambil_jabatan->row();
@@ -49,7 +49,7 @@ class M_Auth extends CI_Model {
 			}
 			$this->session->set_userdata('user_id_jabatan', $id_jabatan);
 			$this->session->set_userdata('user_nama_jabatan', $nama_jabatan);
-			// id bidang
+			
 			$ambil_bidang=$this->db->select('*')->where('id_bidang', $d->id_bidang)->get('tb_bidang');
 			if( $ambil_bidang->num_rows() ) {
 				$data_bidang = $ambil_bidang->row();

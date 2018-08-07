@@ -55,34 +55,27 @@ class Data_Master extends CI_Controller {
 		$this->load->view('V_DataMaster_Admin', $data);
 	}
 
-	public function cuti() {
-		$data = generate_page('Data Master Cuti', 'data_master/cuti', 'Admin');
+	public function nama_izin() {
+		$data = generate_page('Data Master Nama Izin', 'data_master/nama_izin', 'Admin');
 
-			$data_content['title_page'] = 'Data Master Cuti';
-			$data_content['list_all'] = $this->m_datamaster->cuti_list_all();
-		$data['content'] = $this->load->view('partial/DataMasterAdmin/V_Admin_DataMasterCuti_Read', $data_content, true);
+			$data_content['title_page'] = 'Data Master Nama Izin';
+		$data['content'] = $this->load->view('partial/DataMasterAdmin/V_Admin_DataMasterIzin_Read', $data_content, true);
 		$this->load->view('V_DataMaster_Admin', $data);
 	}
 
-	public function sekolah() {
-		$data = generate_page('Data Master Sekolah', 'data_master/sekolah', 'Admin');
-
-			$data_content['title_page'] = 'Data Master Sekolah';
-			$data_content['list_all'] = $this->m_datamaster->sekolah_list_all();
-		$data['content'] = $this->load->view('partial/DataMasterAdmin/V_Admin_DataMasterSekolah_Read', $data_content, true);
-		$this->load->view('V_DataMaster_Admin', $data);
+	public function namaizin_ajax() {
+		json_dump(function() {
+			$result= $this->m_datamaster->namaizin_list_all();
+			$new_arr=array();$i=1;
+			foreach ($result as $key => $value) {
+				$value->no=$i;
+				$new_arr[]=$value;
+				$value->type = '<label class="badge badge-default text-uppercase">'.$value->type.'</label>';
+				$i++;
+			}
+			return array('data' => $new_arr);
+		});
 	}
-
-	public function seminar() {
-		$data = generate_page('Data Master Seminar', 'data_master/seminar', 'Admin');
-
-			$data_content['title_page'] = 'Data Master Seminar';
-			$data_content['list_all'] = $this->m_datamaster->seminar_list_all();
-		$data['content'] = $this->load->view('partial/DataMasterAdmin/V_Admin_DataMasterSeminar_Read', $data_content, true);
-		$this->load->view('V_DataMaster_Admin', $data);
-	}
-
-	//
 
 	public function delete() {
 		if( empty($this->uri->segment('3'))) {
@@ -117,20 +110,10 @@ class Data_Master extends CI_Controller {
 				$this->session->set_flashdata('msg_alert', 'Data pegawai berhasil dihapus');
 				redirect( base_url('data_master/pegawai') );
 				break;
-			case 'cuti':
-				$this->m_datamaster->cuti_delete($id);
-				$this->session->set_flashdata('msg_alert', 'Data cuti berhasil dihapus');
-				redirect( base_url('data_master/cuti') );
-				break;
-			case 'sekolah':
-				$this->m_datamaster->sekolah_delete($id);
-				$this->session->set_flashdata('msg_alert', 'Data sekolah berhasil dihapus');
-				redirect( base_url('data_master/sekolah') );
-				break;
-			case 'seminar':
-				$this->m_datamaster->seminar_delete($id);
-				$this->session->set_flashdata('msg_alert', 'Data seminar berhasil dihapus');
-				redirect( base_url('data_master/seminar') );
+			case 'nama_izin':
+				$this->m_datamaster->namaizin_delete($id);
+				$this->session->set_flashdata('msg_alert', 'Data nama izin berhasil dihapus');
+				redirect( base_url('data_master/nama_izin') );
 				break;
 			
 			default:
@@ -139,8 +122,6 @@ class Data_Master extends CI_Controller {
 		}
 
 	}
-
-	//
 
 	public function edit() {
 		if( empty($this->uri->segment('3'))) {
@@ -205,79 +186,31 @@ class Data_Master extends CI_Controller {
 				$data['content'] = $this->load->view('partial/DataMasterAdmin/V_Admin_DataMasterBidang_Edit', $data_content, true);
 				$this->load->view('V_DataMaster_Admin', $data);
 				break;
-			case 'cuti':
+			case 'nama_izin':
 				if( $_SERVER['REQUEST_METHOD'] == 'POST') {
-					$id= $this->security->xss_clean( $this->input->post('id_cuti') );
-					$nama_cuti= $this->security->xss_clean( $this->input->post('nama_cuti') );
+					$id_namaizin= $this->security->xss_clean( $this->input->post('id_namaizin') );
+					$type= $this->security->xss_clean( $this->input->post('type') );
+					$nama_izin= $this->security->xss_clean( $this->input->post('nama_izin') );
 					// validasi
-					$this->form_validation->set_rules('id_cuti', 'ID', 'required');
-					$this->form_validation->set_rules('nama_cuti', 'Nama Cuti', 'required');
+					$this->form_validation->set_rules('id_namaizin', 'ID', 'required');
+					$this->form_validation->set_rules('type', 'Type Izin', 'required');
+					$this->form_validation->set_rules('nama_izin', 'Nama Izin', 'required');
 
 					if(!$this->form_validation->run()) {
 						$this->session->set_flashdata('msg_alert', validation_errors());
 						redirect( base_url('data_master/edit/' . $name . '/' . $id) );
 					}
 					// to-do
-					$this->m_datamaster->cuti_update(
-						$id,$nama_cuti
+					$this->m_datamaster->namaizin_update(
+						$id_namaizin,$type,$nama_izin
 					);
-					redirect( base_url('data_master/cuti') );
+					//redirect( base_url('data_master/nama_izin') );
 				}
-				$data = generate_page('Edit Data Master Cuti', 'data_master/edit/' . $name . '/' . $id, 'Admin');
+				$data = generate_page('Edit Data Master Nama Izin', 'data_master/edit/' . $name . '/' . $id, 'Admin');
 
-					$data_content['title_page'] = 'Edit Data Master Cuti';
-					$data_content['data_cuti'] = $this->m_datamaster->get_data_cuti($id);
-				$data['content'] = $this->load->view('partial/DataMasterAdmin/V_Admin_DataMasterCuti_Edit', $data_content, true);
-				$this->load->view('V_DataMaster_Admin', $data);
-				break;
-			case 'sekolah':
-				if( $_SERVER['REQUEST_METHOD'] == 'POST') {
-					$id= $this->security->xss_clean( $this->input->post('id_sekolah') );
-					$nama_sekolah= $this->security->xss_clean( $this->input->post('nama_sekolah') );
-					// validasi
-					$this->form_validation->set_rules('id_sekolah', 'ID', 'required');
-					$this->form_validation->set_rules('nama_sekolah', 'Nama Sekolah', 'required');
-
-					if(!$this->form_validation->run()) {
-						$this->session->set_flashdata('msg_alert', validation_errors());
-						redirect( base_url('data_master/edit/' . $name . '/' . $id) );
-					}
-					// to-do
-					$this->m_datamaster->sekolah_update(
-						$id,$nama_sekolah
-					);
-					redirect( base_url('data_master/sekolah') );
-				}
-				$data = generate_page('Edit Data Master Sekolah', 'data_master/edit/' . $name . '/' . $id, 'Admin');
-
-					$data_content['title_page'] = 'Edit Data Master Sekolah';
-					$data_content['data_sekolah'] = $this->m_datamaster->get_data_sekolah($id);
-				$data['content'] = $this->load->view('partial/DataMasterAdmin/V_Admin_DataMasterSekolah_Edit', $data_content, true);
-				$this->load->view('V_DataMaster_Admin', $data);
-				break;
-			case 'seminar':
-				if( $_SERVER['REQUEST_METHOD'] == 'POST') {
-					$id= $this->security->xss_clean( $this->input->post('id_seminar') );
-					$nama_seminar= $this->security->xss_clean( $this->input->post('nama_seminar') );
-					// validasi
-					$this->form_validation->set_rules('id_seminar', 'ID', 'required');
-					$this->form_validation->set_rules('nama_seminar', 'Nama Seminar', 'required');
-
-					if(!$this->form_validation->run()) {
-						$this->session->set_flashdata('msg_alert', validation_errors());
-						redirect( base_url('data_master/edit/' . $name . '/' . $id) );
-					}
-					// to-do
-					$this->m_datamaster->seminar_update(
-						$id,$nama_seminar
-					);
-					redirect( base_url('data_master/seminar') );
-				}
-				$data = generate_page('Edit Data Master Seminar', 'data_master/edit/' . $name . '/' . $id, 'Admin');
-
-					$data_content['title_page'] = 'Edit Data Master Seminar';
-					$data_content['data_seminar'] = $this->m_datamaster->get_data_seminar($id);
-				$data['content'] = $this->load->view('partial/DataMasterAdmin/V_Admin_DataMasterSeminar_Edit', $data_content, true);
+					$data_content['title_page'] = 'Edit Data Master Nama Izin';
+					$data_content['data_namaizin'] = $this->m_datamaster->get_data_namaizin($id);
+				$data['content'] = $this->load->view('partial/DataMasterAdmin/V_Admin_DataMasterIzin_Edit', $data_content, true);
 				$this->load->view('V_DataMaster_Admin', $data);
 				break;
 			case 'pegawai':
@@ -418,8 +351,6 @@ class Data_Master extends CI_Controller {
 		}
 	}
 
-	//
-
 	public function add_new() {
 
 		if( empty($this->uri->segment('3'))) {
@@ -467,61 +398,25 @@ class Data_Master extends CI_Controller {
 				$data['content'] = $this->load->view('partial/DataMasterAdmin/V_Admin_DataMasterBidang_Create', $data_content, true);
 				$this->load->view('V_DataMaster_Admin', $data);
 				break;
-			case 'cuti':
+			case 'nama_izin':
 				if( $_SERVER['REQUEST_METHOD'] == 'POST') {
-					$nama_cuti= $this->security->xss_clean( $this->input->post('nama_cuti') );
-					$this->form_validation->set_rules('nama_cuti', 'Nama Cuti', 'required');
+					$type= $this->security->xss_clean( $this->input->post('type') );
+					$nama_izin= $this->security->xss_clean( $this->input->post('nama_izin') );
+					$this->form_validation->set_rules('type', 'Type Izin', 'required');
+					$this->form_validation->set_rules('nama_izin', 'Nama Izin', 'required');
 					if(!$this->form_validation->run()) {
 						$this->session->set_flashdata('msg_alert', validation_errors());
 						redirect( base_url('data_master/add_new/' . $name) );
 					}
-					$this->m_datamaster->cuti_add_new(
-						$nama_cuti
+					$this->m_datamaster->namaizin_add_new(
+						$type,$nama_izin
 					);
 					redirect( base_url('data_master/' . $name) );
 				}
-				$data = generate_page('Entry Data Master Cuti', 'data_master/add_new/cuti', 'Admin');
+				$data = generate_page('Entry Data Master Nama Izin', 'data_master/add_new/nama_izin', 'Admin');
 
-					$data_content['title_page'] = 'Entry Data Master Cuti';
-				$data['content'] = $this->load->view('partial/DataMasterAdmin/V_Admin_DataMasterCuti_Create', $data_content, true);
-				$this->load->view('V_DataMaster_Admin', $data);
-				break;
-			case 'sekolah':
-				if( $_SERVER['REQUEST_METHOD'] == 'POST') {
-					$nama_sekolah= $this->security->xss_clean( $this->input->post('nama_sekolah') );
-					$this->form_validation->set_rules('nama_sekolah', 'Nama Sekolah', 'required');
-					if(!$this->form_validation->run()) {
-						$this->session->set_flashdata('msg_alert', validation_errors());
-						redirect( base_url('data_master/add_new/' . $name) );
-					}
-					$this->m_datamaster->sekolah_add_new(
-						$nama_sekolah
-					);
-					redirect( base_url('data_master/' . $name) );
-				}
-				$data = generate_page('Entry Data Master Sekolah', 'data_master/add_new/sekolah', 'Admin');
-
-					$data_content['title_page'] = 'Entry Data Master Sekolah';
-				$data['content'] = $this->load->view('partial/DataMasterAdmin/V_Admin_DataMasterSekolah_Create', $data_content, true);
-				$this->load->view('V_DataMaster_Admin', $data);
-				break;
-			case 'seminar':
-				if( $_SERVER['REQUEST_METHOD'] == 'POST') {
-					$nama_seminar= $this->security->xss_clean( $this->input->post('nama_seminar') );
-					$this->form_validation->set_rules('nama_seminar', 'Nama Seminar', 'required');
-					if(!$this->form_validation->run()) {
-						$this->session->set_flashdata('msg_alert', validation_errors());
-						redirect( base_url('data_master/add_new/' . $name) );
-					}
-					$this->m_datamaster->seminar_add_new(
-						$nama_seminar
-					);
-					redirect( base_url('data_master/' . $name) );
-				}
-				$data = generate_page('Entry Data Master Seminar', 'data_master/add_new/seminar', 'Admin');
-
-					$data_content['title_page'] = 'Entry Data Master Seminar';
-				$data['content'] = $this->load->view('partial/DataMasterAdmin/V_Admin_DataMasterSeminar_Create', $data_content, true);
+					$data_content['title_page'] = 'Entry Data Master Nama Izin';
+				$data['content'] = $this->load->view('partial/DataMasterAdmin/V_Admin_DataMasterIzin_Create', $data_content, true);
 				$this->load->view('V_DataMaster_Admin', $data);
 				break;
 			case 'admin':

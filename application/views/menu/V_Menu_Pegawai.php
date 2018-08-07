@@ -23,32 +23,10 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#ui-ki1" aria-expanded="false" aria-controls="ui-ki">
+            <a class="nav-link" href="<?=base_url('daftar_izin');?>">
               <i class="menu-icon mdi mdi-treasure-chest"></i>
               <span class="menu-title">Daftar Izin</span>
-              <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="ui-ki1">
-              <ul class="nav flex-column sub-menu">
-                <?=generate_navlink($path_page, 'daftar_izin/cuti', 'Daftar Izin Cuti');?>
-                <?=generate_navlink($path_page, 'daftar_izin/sekolah', 'Daftar Izin Sekolah');?>
-                <?=generate_navlink($path_page, 'daftar_izin/seminar', 'Daftar Izin Seminar');?>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#ui-ki" aria-expanded="false" aria-controls="ui-ki">
-              <i class="menu-icon mdi mdi-checkbox-multiple-marked-outline"></i>
-              <span class="menu-title">Ajukan Izin</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="ui-ki">
-              <ul class="nav flex-column sub-menu">
-                <?=generate_navlink($path_page, 'ajukan_izin/cuti', 'Izin Cuti');?>
-                <?=generate_navlink($path_page, 'ajukan_izin/sekolah', 'Izin Sekolah');?>
-                <?=generate_navlink($path_page, 'ajukan_izin/seminar', 'Izin Seminar');?>
-              </ul>
-            </div>
           </li>
         </ul>
       </nav>

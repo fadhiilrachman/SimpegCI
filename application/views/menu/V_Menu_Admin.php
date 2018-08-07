@@ -33,39 +33,21 @@
                 <?=generate_navlink($path_page, 'data_master/jabatan', 'Data Jabatan');?>
                 <?=generate_navlink($path_page, 'data_master/bidang', 'Data Bidang');?>
                 <?=generate_navlink($path_page, 'data_master/pegawai', 'Data Pegawai');?>
-                <?=generate_navlink($path_page, 'data_master/cuti', 'Data Cuti');?>
-                <?=generate_navlink($path_page, 'data_master/sekolah', 'Data Sekolah');?>
-                <?=generate_navlink($path_page, 'data_master/seminar', 'Data Seminar');?>
+                <?=generate_navlink($path_page, 'data_master/nama_izin', 'Data Nama Izin');?>
               </ul>
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#ui-di" aria-expanded="false" aria-controls="ui-di">
+            <a class="nav-link" href="<?=base_url('data_izin');?>">
               <i class="menu-icon mdi mdi-treasure-chest"></i>
               <span class="menu-title">Manajemen Data Izin</span>
-              <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="ui-di">
-              <ul class="nav flex-column sub-menu">
-                <?=generate_navlink($path_page, 'data_izin/cuti', 'Data Izin Cuti');?>
-                <?=generate_navlink($path_page, 'data_izin/sekolah', 'Data Izin Sekolah');?>
-                <?=generate_navlink($path_page, 'data_izin/seminar', 'Data Izin Seminar');?>
-              </ul>
-            </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#ui-ki" aria-expanded="false" aria-controls="ui-ki">
+            <a class="nav-link" href="<?=base_url('konfirmasi_izin');?>">
               <i class="menu-icon mdi mdi-checkbox-multiple-marked-outline"></i>
               <span class="menu-title">Konfirmasi Izin</span>
-              <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="ui-ki">
-              <ul class="nav flex-column sub-menu">
-                <?=generate_navlink($path_page, 'konfirmasi_izin/cuti', 'Izin Cuti');?>
-                <?=generate_navlink($path_page, 'konfirmasi_izin/sekolah', 'Izin Sekolah');?>
-                <?=generate_navlink($path_page, 'konfirmasi_izin/seminar', 'Izin Seminar');?>
-              </ul>
-            </div>
           </li>
         </ul>
       </nav>

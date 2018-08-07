@@ -14,15 +14,14 @@ class Change_Password extends CI_Controller {
 		});
 		if( $this->session->userdata('user_type') == 'admin' ) {
 			$this->user_type = 'Admin';
-		} else if( $this->session->userdata('user_type') == 'baak' ){
+		} else if( $this->session->userdata('user_type') == 'baak' ) {
 			$this->user_type = 'BAAK';
-		} else if( $this->session->userdata('user_type') == 'pegawai' ){
+		} else if( $this->session->userdata('user_type') == 'pegawai' ) {
 			$this->user_type = 'Pegawai';
 		}
 	}
 
-	public function index()
-	{
+	public function index() {
 		if( $_SERVER['REQUEST_METHOD'] == 'POST') {
 			$old_pass= $this->security->xss_clean( $this->input->post('old_pass') );
 			$new_pass= $this->security->xss_clean( $this->input->post('new_pass') );

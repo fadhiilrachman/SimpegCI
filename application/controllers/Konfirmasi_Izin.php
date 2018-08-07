@@ -20,109 +20,31 @@ class Konfirmasi_Izin extends CI_Controller {
 		}
 	}
 
+	public function list_ajax() {
+		json_dump(function() {
+			$result=$this->m_ki->izin_list_ajax( $this->m_ki->izin_list_all() );
+			return array('data' => $result);
+		});
+	}
+
 	public function index() {
-		
-	}
+		$data = generate_page('Konfirmasi Izin', 'konfirmasi_izin', $this->user_type);
 
-	public function cuti() {
-		$data = generate_page('Konfirmasi Izin Cuti', 'konfirmasi_izin/cuti', $this->user_type);
-
-			$data_content['title_page'] = 'Konfirmasi Izin Cuti';
-			$data_content['list_all'] = $this->m_ki->cuti_list_all();
-		$data['content'] = $this->load->view('partial/KonfirmasiIzinAdmin/V_Cuti_KonfirmasiIzinAdmin', $data_content, true);
+			$data_content['title_page'] = 'Konfirmasi Izin';
+		$data['content'] = $this->load->view('partial/KonfirmasiIzinAdmin/V_KonfirmasiIzinAdmin', $data_content, true);
 		$this->load->view('V_KonfirmasiIzin_Admin', $data);
 	}
 
-	public function sekolah() {
-		$data = generate_page('Konfirmasi Izin Cuti', 'konfirmasi_izin/sekolah', $this->user_type);
-
-			$data_content['title_page'] = 'Konfirmasi Izin Sekolah';
-			$data_content['list_all'] = $this->m_ki->sekolah_list_all();
-		$data['content'] = $this->load->view('partial/KonfirmasiIzinAdmin/V_Sekolah_KonfirmasiIzinAdmin', $data_content, true);
-		$this->load->view('V_KonfirmasiIzin_Admin', $data);
+	public function accept($id_izin) {
+		$this->m_ki->accept_izin($id_izin);
+		$this->session->set_flashdata('msg_alert', 'Pengajuan izin berhasil diaccept');
+		redirect( base_url('konfirmasi_izin') );
 	}
 
-	public function seminar() {
-		$data = generate_page('Konfirmasi Izin Seminar', 'konfirmasi_izin/seminar', $this->user_type);
-
-			$data_content['title_page'] = 'Konfirmasi Izin Seminar';
-			$data_content['list_all'] = $this->m_ki->seminar_list_all();
-		$data['content'] = $this->load->view('partial/KonfirmasiIzinAdmin/V_Seminar_KonfirmasiIzinAdmin', $data_content, true);
-		$this->load->view('V_KonfirmasiIzin_Admin', $data);
-	}
-
-	public function accept() {
-
-		if( empty($this->uri->segment('3'))) {
-			redirect( base_url('/dashboard') );
-		}
-
-		if( empty($this->uri->segment('4'))) {
-			redirect( base_url('/dashboard') );
-		}
-
-		$name=$this->uri->segment('3');
-		$id=$this->uri->segment('4');
-
-		switch ($name) {
-			case 'cuti':
-				$this->m_ki->accept_izin($id, $name);
-				$this->session->set_flashdata('msg_alert', 'Pengajuan izin cuti berhasil diaccept');
-				redirect( base_url('konfirmasi_izin/cuti') );
-				break;
-			case 'sekolah':
-				$this->m_ki->accept_izin($id, $name);
-				$this->session->set_flashdata('msg_alert', 'Pengajuan izin sekolah berhasil diaccept');
-				redirect( base_url('konfirmasi_izin/sekolah') );
-				break;
-			case 'seminar':
-				$this->m_ki->accept_izin($id, $name);
-				$this->session->set_flashdata('msg_alert', 'Pengajuan izin seminar berhasil diaccept');
-				redirect( base_url('konfirmasi_izin/seminar') );
-				break;
-			
-			default:
-				redirect( base_url() );
-				break;
-		}
-
-	}
-
-	public function reject() {
-		
-		if( empty($this->uri->segment('3'))) {
-			redirect( base_url('/dashboard') );
-		}
-
-		if( empty($this->uri->segment('4'))) {
-			redirect( base_url('/dashboard') );
-		}
-
-		$name=$this->uri->segment('3');
-		$id=$this->uri->segment('4');
-
-		switch ($name) {
-			case 'cuti':
-				$this->m_ki->reject_izin($id, $name);
-				$this->session->set_flashdata('msg_alert', 'Pengajuan izin cuti berhasil direject');
-				redirect( base_url('konfirmasi_izin/cuti') );
-				break;
-			case 'sekolah':
-				$this->m_ki->reject_izin($id, $name);
-				$this->session->set_flashdata('msg_alert', 'Pengajuan izin sekolah berhasil direject');
-				redirect( base_url('konfirmasi_izin/sekolah') );
-				break;
-			case 'seminar':
-				$this->m_ki->reject_izin($id, $name);
-				$this->session->set_flashdata('msg_alert', 'Pengajuan izin seminar berhasil direject');
-				redirect( base_url('konfirmasi_izin/seminar') );
-				break;
-			
-			default:
-				redirect( base_url() );
-				break;
-		}
-
+	public function reject($id_izin) {
+		$this->m_ki->reject_izin($id_izin);
+		$this->session->set_flashdata('msg_alert', 'Pengajuan izin berhasil direject');
+		redirect( base_url('konfirmasi_izin') );
 	}
 
 }

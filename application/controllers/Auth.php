@@ -25,25 +25,6 @@ class Auth extends CI_Controller {
 			redirect( base_url('dashboard') );
 		});
 		if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
-			$resp_recaptcha= $this->input->post('g-recaptcha-response');
-			$url = 'https://www.google.com/recaptcha/api/siteverify';
-			$data = array(
-				'secret' => '6LftN2IUAAAAAOlWDseBz4IYxaU36vLE9Ey0f5_2',
-				'response' => $resp_recaptcha
-			);
-			$options = array(
-				'http' => array (
-					'method' => 'POST',
-					'content' => http_build_query($data)
-				)
-			);
-			$context  = stream_context_create($options);
-			$verify = file_get_contents($url, false, $context);
-			$captcha_success=json_decode($verify);
-			if ($captcha_success->success==false) {
-				$this->session->set_flashdata('msg_alert', 'Captcha tidak valid');
-				redirect( base_url('auth/login') );
-			}
 			$email= $this->security->xss_clean( $this->input->post('email') );
 			$password= $this->security->xss_clean( $this->input->post('password') );
 			// validasi
@@ -65,25 +46,6 @@ class Auth extends CI_Controller {
 			redirect( base_url('dashboard') );
 		});
 		if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
-			$resp_recaptcha= $this->input->post('g-recaptcha-response');
-			$url = 'https://www.google.com/recaptcha/api/siteverify';
-			$data = array(
-				'secret' => '6LftN2IUAAAAAOlWDseBz4IYxaU36vLE9Ey0f5_2',
-				'response' => $resp_recaptcha
-			);
-			$options = array(
-				'http' => array (
-					'method' => 'POST',
-					'content' => http_build_query($data)
-				)
-			);
-			$context  = stream_context_create($options);
-			$verify = file_get_contents($url, false, $context);
-			$captcha_success=json_decode($verify);
-			if ($captcha_success->success==false) {
-				$this->session->set_flashdata('msg_alert', 'Captcha tidak valid');
-				redirect( base_url('auth/lost_password') );
-			}
 			$email= $this->security->xss_clean( $this->input->post('email') );
 			// validasi
 			$this->form_validation->set_rules('email', 'E-mail', 'trim|required|valid_email');

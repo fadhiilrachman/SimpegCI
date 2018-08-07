@@ -16545,4 +16545,9 @@ ul {
   .error-page .error-page-divider {
     border-left: 3px solid rgba(255, 255, 255, 0.2); } }
 
+div.alert > label > p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 /*# sourceMappingURL=maps/style.css.map */
