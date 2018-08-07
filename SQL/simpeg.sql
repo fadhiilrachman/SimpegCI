@@ -47,7 +47,10 @@ INSERT INTO `tb_izin` (`id_izin`, `id_namaizin`, `id`, `tglawal`, `tempat`, `tgl
 (2, 2, 11, '2018-08-17', 'Jakarta', '2018-08-16', 'waiting'),
 (3, 2, 10, '2018-08-01', 'Jakarta', '2018-08-04', 'approved'),
 (4, 5, 10, '2018-08-21', 'Depok', '2018-08-22', 'waiting'),
-(5, 3, 11, '2018-10-05', 'Jakarta', '2018-12-01', 'waiting');
+(5, 3, 11, '2018-10-05', 'Jakarta', '2018-12-01', 'rejected'),
+(8, 14, 12, '2018-08-22', 'Bekasi', '2018-08-24', 'waiting'),
+(9, 12, 10, '2018-08-16', 'Bekasi', '2018-08-20', 'approved'),
+(10, 11, 11, '2018-09-21', 'Bandung', '2018-09-22', 'waiting');
 
 CREATE TABLE `tb_jabatan` (
   `id_jabatan` int(255) NOT NULL,
@@ -136,7 +139,7 @@ ALTER TABLE `tb_bidang`
   MODIFY `id_bidang` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 ALTER TABLE `tb_izin`
-  MODIFY `id_izin` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_izin` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 ALTER TABLE `tb_jabatan`
   MODIFY `id_jabatan` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
