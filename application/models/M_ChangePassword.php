@@ -8,14 +8,12 @@ class M_ChangePassword extends CI_Model {
 		if( $this->session->userdata('user_type') == 'pegawai') {
 			$kolom = 'id';
 			$table = 'tb_pegawai';
-			$q=$this->db->select('password')->from('tb_pegawai')->where('id', $user_id)->get();
-			$data = $q->row();
 		} else {
 			$kolom = 'id_user';
 			$table = 'tb_admin';
-			$q=$this->db->select('password')->from('tb_admin')->where('id_user', $user_id)->get();
-			$data = $q->row();
 		}
+		$q=$this->db->select('password')->from($table)->where($kolom, $user_id)->get();
+		$data = $q->row();
 		if( md5($old_pass) !== $data->password) {
 			$this->session->set_flashdata('msg_alert', 'Password lama tidak sama');
 			redirect( base_url('change_password') );
