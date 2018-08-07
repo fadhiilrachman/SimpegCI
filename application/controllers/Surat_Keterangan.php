@@ -27,13 +27,6 @@ class Surat_Keterangan extends CI_Controller {
 
 		$id=$this->uri->segment('3');
 		$data['dl'] = false;
-		if( $_SERVER['REQUEST_METHOD'] == 'GET') {
-			if( isset($_GET['dl']) ) {
-				$data['dl'] = true;
-				header("Content-type: application/vnd.ms-word");
-				header("Content-Disposition: attachment; filename=SkBAAK-001-{$id}.doc");
-			}
-		}
 		$data['id'] = $id;
 		$data['user_name'] = $this->session->userdata('user_name');
 		$data['data'] = $this->m_dataizin->get_data_izin($id);
@@ -50,6 +43,13 @@ class Surat_Keterangan extends CI_Controller {
 			case 'seminar':
 					$data['type_id'] = '003';
 				break;
+		}
+		if( $_SERVER['REQUEST_METHOD'] == 'GET') {
+			if( isset($_GET['dl']) ) {
+				$data['dl'] = true;
+				header("Content-type: application/vnd.ms-word");
+				header("Content-Disposition: attachment; filename=SkBAAK-{$data['type_id']}-{$id}.doc");
+			}
 		}
 		$data['tempat_lahir'] = strtoupper($data['data']->tempat_lahir);
 		$data['tanggal_lahir'] = date_format( date_create($data['data']->tanggal_lahir), 'd M Y');
