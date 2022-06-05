@@ -43,6 +43,9 @@ class surat_keterangan extends CI_Controller {
 			case 'seminar':
 					$data['type_id'] = '003';
 				break;
+			default:
+					$data['type_id'] = '000';
+				break;
 		}
 		if( $_SERVER['REQUEST_METHOD'] == 'GET') {
 			if( isset($_GET['dl']) ) {
