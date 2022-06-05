@@ -20,8 +20,8 @@ CREATE TABLE `tb_admin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 INSERT INTO `tb_admin` (`id_user`, `username`, `email`, `namalengkap`, `password`, `type`, `avatar`) VALUES
-(1, 'fadhiilrachman', 'admin@gmail.com', 'Fadhiil Rachman', '21232f297a57a5a743894a0e4a801fc3', 'admin', '41241cacd6a56d9cb6bef52fb1d337b1.jpg'),
-(6, 'baak', 'baak@gmail.com', 'Ka. BAAK', 'f6edb4c31cf9be5ce497d12251a9d29e', 'baak', '2b10f8e9a8cf35bd216750928492d585.jpg'),
+(1, 'fadhiilrachman', 'admin@gmail.com', 'Fadhiil Rachman', '21232f297a57a5a743894a0e4a801fc3', 'admin', 'avatar.png'),
+(6, 'baak', 'baak@gmail.com', 'Ka. BAAK', 'f6edb4c31cf9be5ce497d12251a9d29e', 'baak', 'avatar.png'),
 (7, 'baak2', 'baak2@gmail.com', 'Ka. BAAK 2', '3cf1462ae5dadb71e6d875df74ecbd9f', 'baak', 'avatar.png');
 
 CREATE TABLE `tb_bidang` (
@@ -80,7 +80,7 @@ INSERT INTO `tb_namaizin` (`id_namaizin`, `type`, `nama_izin`) VALUES
 (9, 'seminar', 'Seminar Gemastik 11'),
 (11, 'sekolah', 'Rapat Kurikulum'),
 (12, 'cuti', 'Cuti Idul Adha'),
-(13, 'cuti', 'Cuti Pregnant'),
+(13, 'cuti', 'Cuti Tahunan'),
 (14, 'seminar', 'Seminar Google I/O 2018');
 
 CREATE TABLE `tb_pegawai` (
@@ -108,9 +108,9 @@ CREATE TABLE `tb_pegawai` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 INSERT INTO `tb_pegawai` (`id`, `nama`, `nip`, `tempat_lahir`, `tanggal_lahir`, `jenis_kelamin`, `pendidikan_terakhir`, `status_perkawinan`, `status_pegawai`, `id_jabatan`, `id_bidang`, `agama`, `alamat`, `no_ktp`, `no_rumah`, `no_handphone`, `email`, `password`, `id_user`, `tanggal_pengangkatan`, `avatar`) VALUES
-(10, 'Nalika Alzahra', 41551, 'Jakarta', '1989-02-09', 'Perempuan', 'S1', 'Belum kawin', 'Karyawan tetap', 3, 1, 'Islam', 'Komplek Permata Hijau No. 12', 2147483647, 12, 2147483647, 'pegawai@gmail.com', '047aeeb234644b9e2d4138ed3bc7976a', 'pegawai', '2018-07-04', '2c8d297706acce932eb1f14232370517.jpg'),
-(11, 'Kendal Janner', 144124, 'Bandung', '1990-07-10', 'Perempuan', 'S3', 'Belum kawin', 'Karyawan tetap', 1, 1, 'Kristen Protestan', 'Komplek Permata Hijau No. 12', 2147483647, 21, 2147483647, 'pegawai1@gmail.com', '0b96cb1d0dfbcc85f6b57041656abc49', 'pegawai1', '2017-09-01', 'b0ff73b761a90fa10d9b8b9570a58b6e.jpg'),
-(12, 'Benjamin Aljabar R', 412411, 'Jakarta', '1997-01-06', 'Laki-laki', 'SMP/SMA', 'Belum kawin', 'Karyawan kontrak', 3, 1, 'Islam', 'Komplek Permata Hijau No. 12', 2147483647, 22, 2147483647, 'pegawai2@gmail.com', 'fa23517aa1adfaab707494340009a330', 'pegawai2', '2018-02-06', '37d631763c91e22324dd08cd4d20d40b.jpg');
+(10, 'Nalika Alzahra', 41551, 'Jakarta', '1989-02-09', 'Perempuan', 'S1', 'Belum kawin', 'Karyawan tetap', 3, 1, 'Islam', 'Komplek Permata Hijau No. 12', 2147483647, 12, 2147483647, 'pegawai@gmail.com', '047aeeb234644b9e2d4138ed3bc7976a', 'pegawai', '2018-07-04', 'avatar.png'),
+(11, 'Kendal Janner', 144124, 'Bandung', '1990-07-10', 'Perempuan', 'S3', 'Belum kawin', 'Karyawan tetap', 1, 1, 'Kristen Protestan', 'Komplek Permata Hijau No. 12', 2147483647, 21, 2147483647, 'pegawai1@gmail.com', '0b96cb1d0dfbcc85f6b57041656abc49', 'pegawai1', '2017-09-01', 'avatar.png'),
+(12, 'Benjamin Aljabar R', 412411, 'Jakarta', '1997-01-06', 'Laki-laki', 'SMP/SMA', 'Belum kawin', 'Karyawan kontrak', 3, 1, 'Islam', 'Komplek Permata Hijau No. 12', 2147483647, 22, 2147483647, 'pegawai2@gmail.com', 'fa23517aa1adfaab707494340009a330', 'pegawai2', '2018-02-06', 'avatar.png');
 
 
 ALTER TABLE `tb_admin`
